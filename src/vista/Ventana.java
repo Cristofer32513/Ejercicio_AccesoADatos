@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 
 
 @SuppressWarnings("serial")
-class Ventana extends JFrame implements ActionListener {
+public class Ventana extends JFrame implements ActionListener {
 	
 	Font fuenteArial12Normal=new Font("Arial", 0, 12);
 	Font fuenteArial14Negrita=new Font("Arial", 1, 12);
