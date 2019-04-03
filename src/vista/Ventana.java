@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 
 @SuppressWarnings("serial")
@@ -797,5 +798,21 @@ public class Ventana extends JFrame implements ActionListener {
 			if(c instanceof JComboBox)
 				((JComboBox<?>) c).setSelectedIndex(0);
 		}		
+	}
+	
+	public void actualizarTablas(JTable tabla, String consulta){
+		String controlador="com.mysql.cj.jdbc.Driver";
+		String url="jdbc:mysql://localhost/BD_Escuela?useTimezone=true&serverTimezone=UTC";
+		ResultSetTableModel modeloDatos=null;
+		
+		try {
+			modeloDatos=new ResultSetTableModel(controlador, url, consulta);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		tabla.setModel(modeloDatos);
 	}
 }
