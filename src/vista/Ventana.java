@@ -18,6 +18,8 @@ public class Ventana extends JFrame implements ActionListener {
 	Font fuenteArial12Normal=new Font("Arial", 0, 12);
 	Font fuenteArial14Negrita=new Font("Arial", 1, 12);
 	
+	final static String mostrarTodosLosDatos="SELECT * FROM Alumnos2";
+	
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos, itemBajaAlumnos, itemModificacionAlumnos, itemConsultaAlumnos;
 	DefaultTableModel modeloTabla;
@@ -206,15 +208,16 @@ public class Ventana extends JFrame implements ActionListener {
 				panelTablaAltas.setLayout(new BorderLayout());
 				panelTablaAltas.setBounds(25, 300, 680, 120);
 				
-				tablaA = new JTable(6,6);
+				tablaA = new JTable(6,7);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaA, "NO. CONTROL", 0);
 					nombreColumnas(tablaA, "NOMBRE", 1);
 					nombreColumnas(tablaA, "AP. PATERNO", 2);
 					nombreColumnas(tablaA, "AP. MATERNO", 3);
-					nombreColumnas(tablaA, "SEMESTRE", 4);
-					nombreColumnas(tablaA, "CARRERA", 5);
+					nombreColumnas(tablaA, "EDAD", 4);
+					nombreColumnas(tablaA, "SEMESTRE", 5);
+					nombreColumnas(tablaA, "CARRERA", 6);
 							       
 			        JScrollPane scrollA = new JScrollPane(tablaA);
 			        
@@ -369,15 +372,16 @@ public class Ventana extends JFrame implements ActionListener {
 				panelBTablaBajas.setLayout(new BorderLayout());
 				panelBTablaBajas.setBounds(25, 320, 680, 120);
 				
-				tablaB = new JTable(6,6);
-				modeloTabla = (DefaultTableModel) tablaB.getModel();
+				tablaB = new JTable(6,7);
+				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaB, "NO. CONTROL", 0);
 					nombreColumnas(tablaB, "NOMBRE", 1);
 					nombreColumnas(tablaB, "AP. PATERNO", 2);
 					nombreColumnas(tablaB, "AP. MATERNO", 3);
-					nombreColumnas(tablaB, "SEMESTRE", 4);
-					nombreColumnas(tablaB, "CARRERA", 5);
+					nombreColumnas(tablaB, "EDAD", 4);
+					nombreColumnas(tablaB, "SEMESTRE", 5);
+					nombreColumnas(tablaB, "CARRERA", 6);
 					
 			        JScrollPane scrollB = new JScrollPane(tablaB);
 			        
@@ -527,15 +531,16 @@ public class Ventana extends JFrame implements ActionListener {
 				panelTablaModificaciones.setLayout(new BorderLayout());
 				panelTablaModificaciones.setBounds(25, 320, 680, 120);
 				
-				tablaM = new JTable(6,6);
-				modeloTabla = (DefaultTableModel) tablaM.getModel();
+				tablaM = new JTable(6,7);
+				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaM, "NO. CONTROL", 0);
 					nombreColumnas(tablaM, "NOMBRE", 1);
 					nombreColumnas(tablaM, "AP. PATERNO", 2);
 					nombreColumnas(tablaM, "AP. MATERNO", 3);
-					nombreColumnas(tablaM, "SEMESTRE", 4);
-					nombreColumnas(tablaM, "CARRERA", 5);
+					nombreColumnas(tablaM, "EDAD", 4);
+					nombreColumnas(tablaM, "SEMESTRE", 5);
+					nombreColumnas(tablaM, "CARRERA", 6);
 					
 			        JScrollPane scrollM = new JScrollPane(tablaM);
 			        
@@ -670,15 +675,16 @@ public class Ventana extends JFrame implements ActionListener {
 				panelTablaConsultas.setLayout(new BorderLayout());
 				panelTablaConsultas.setBounds(25, 315, 680, 120);
 				
-				tablaC = new JTable(6,6);
-				modeloTabla = (DefaultTableModel) tablaC.getModel();
+				tablaC = new JTable(6,7);
+				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaC, "NO. CONTROL", 0);
 					nombreColumnas(tablaC, "NOMBRE", 1);
 					nombreColumnas(tablaC, "AP. PATERNO", 2);
 					nombreColumnas(tablaC, "AP. MATERNO", 3);
-					nombreColumnas(tablaC, "SEMESTRE", 4);
-					nombreColumnas(tablaC, "CARRERA", 5);
+					nombreColumnas(tablaC, "EDAD", 4);
+					nombreColumnas(tablaC, "SEMESTRE", 5);
+					nombreColumnas(tablaC, "CARRERA", 6);
 					
 			        JScrollPane scrollC = new JScrollPane(tablaC);
 			        
@@ -687,18 +693,6 @@ public class Ventana extends JFrame implements ActionListener {
 			internalFrameConsultaAlumnos.add(panelTablaConsultas);
 			
 		desktopPane.add(internalFrameConsultaAlumnos);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		add(desktopPane, BorderLayout.CENTER);	
 	}
@@ -722,25 +716,31 @@ public class Ventana extends JFrame implements ActionListener {
 	public void agregarItem(JMenuItem item, int letraEvento){
 		item.addActionListener(this);
 		item.setMnemonic(letraEvento);
-		item.setAccelerator(KeyStroke.getKeyStroke(letraEvento, ActionEvent.CTRL_MASK));
+		item.setAccelerator(KeyStroke.getKeyStroke(letraEvento, ActionEvent.ALT_MASK));
 		menuPrincipalAlumnos.add(item);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==itemAltaAlumnos){
+			actualizarTablas(tablaA, mostrarTodosLosDatos);
+			
 			internalFrameAltaAlumnos.setVisible(true);
 			internalFrameBajaAlumnos.setVisible(false);
 			internalFrameModificacionAlumnos.setVisible(false);
 			internalFrameConsultaAlumnos.setVisible(false);
 		}
 		if(e.getSource()==itemBajaAlumnos){
+			actualizarTablas(tablaB, mostrarTodosLosDatos);
+			
 			internalFrameBajaAlumnos.setVisible(true);
 			internalFrameAltaAlumnos.setVisible(false);
 			internalFrameModificacionAlumnos.setVisible(false);
 			internalFrameConsultaAlumnos.setVisible(false);
 		}
 		if	(e.getSource()==itemModificacionAlumnos){
+			actualizarTablas(tablaM, mostrarTodosLosDatos);
+			
 			internalFrameModificacionAlumnos.setVisible(true);
 			internalFrameBajaAlumnos.setVisible(false);
 			internalFrameAltaAlumnos.setVisible(false);
