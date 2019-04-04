@@ -11,6 +11,7 @@ public class AlumnoDAO {
 	//Metodos que permiten realizar las Altas, Bajas, Cambios y Consultas
 	
 	public boolean agregarAlumno(Alumno alumno){
+		boolean resultado;
 		String sql="INSERT INTO Alumnos3 VALUES ('"+alumno.getNumControl()
 			+"', '"+alumno.getNombre()
 			+"', '"+alumno.getApellidoP()
@@ -19,17 +20,23 @@ public class AlumnoDAO {
 			+", '"+alumno.getCarrera()+"')";
 		
 		ConexionBD conexion=new ConexionBD();
-		return conexion.ejecutarInstruccion(sql);
+		resultado=conexion.ejecutarInstruccion(sql);
+		conexion.cerrarConexion();
+		return resultado;
 	}
 	
 	public boolean eliminarAlumno(String numControl){
+		boolean resultado;
 		String sql="DELETE FROM Alumnos3 WHERE NumControl='"+numControl+"'";
 		
 		ConexionBD conexion=new ConexionBD();
-		return conexion.ejecutarInstruccion(sql);
+		resultado=conexion.ejecutarInstruccion(sql);
+		conexion.cerrarConexion();
+		return resultado;
 	}
 	
 	public boolean modificarAlumno(Alumno alumno){
+		boolean resultado;
 		String sql="UPDATE Alumnos3 SET Nombre='"+alumno.getNombre()
 			+"', ApellidoP='"+alumno.getApellidoP()
 			+"', ApellidoM='"+alumno.getApellidoM()
@@ -38,7 +45,9 @@ public class AlumnoDAO {
 			+"' WHERE NumControl='"+alumno.getNumControl()+"'";
 		
 		ConexionBD conexion=new ConexionBD();
-		return conexion.ejecutarInstruccion(sql);
+		resultado=conexion.ejecutarInstruccion(sql);
+		conexion.cerrarConexion();
+		return resultado;
 	}
 	
 	
@@ -61,6 +70,8 @@ public class AlumnoDAO {
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			return null;
+		} finally{
+			conexion.cerrarConexion();
 		}
 		
 		return alumno;
@@ -91,8 +102,10 @@ public class AlumnoDAO {
 			while(resultado.next());
 			return listaAlumnos;
 		} catch (SQLException e) {
-			System.out.println("no se encontro alumno");
+			//System.out.println("no se encontro alumno");
 			return null;
+		} finally{
+			conexion.cerrarConexion();
 		}
 	}
 }
