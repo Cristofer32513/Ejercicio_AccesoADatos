@@ -50,7 +50,6 @@ public class AlumnoDAO {
 		return resultado;
 	}
 	
-	
 	//==================BUSCAR UN REGISTRO===================
 	public Alumno buscarAlumno(String NumControl){
 		Alumno alumno=new Alumno();
