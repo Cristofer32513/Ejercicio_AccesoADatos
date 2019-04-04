@@ -59,7 +59,7 @@ public class AlumnoDAO {
 			alumno.setSemestre(resultado.getByte(5));
 			alumno.setCarrera(resultado.getString(6));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 		

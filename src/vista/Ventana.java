@@ -795,13 +795,19 @@ public class Ventana extends JFrame implements ActionListener {
 						, txtFApellidoMA.getText(), (byte)Integer.parseInt(comboBSemestreA.getSelectedItem().toString())
 						, comboBCarreraA.getSelectedItem().toString());
 				
-				if(alumnoDao.agregarAlumno(alumno)){
-					JOptionPane.showMessageDialog(rootPane, "Alumno agregado correctamente.");
-					restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA,
-							comboBSemestreA, comboBCarreraA);
+				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolA.getText());
+				
+				if(al==null){
+					if(alumnoDao.agregarAlumno(alumno)){
+						JOptionPane.showMessageDialog(rootPane, "Alumno agregado correctamente.");
+						restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA,
+								comboBSemestreA, comboBCarreraA);
+					}
+					else
+						JOptionPane.showMessageDialog(rootPane, "Error al agregar el alumno.");
 				}
 				else
-					JOptionPane.showMessageDialog(rootPane, "Error al agregar el alumno.");
+					JOptionPane.showMessageDialog(rootPane, "El numero de control ingresado ya existe.");
 			}
 			else
 				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
@@ -833,12 +839,11 @@ public class Ventana extends JFrame implements ActionListener {
 						comboBSemestreB, comboBCarreraB);
 				btnEliminar.setEnabled(false);
 				txtFNumcontrolB.setEditable(true);
+				txtFNumcontrolB.setEditable(true);
 			}
 			else
 				JOptionPane.showMessageDialog(rootPane, "Error al eliminar el alumno.");
-			restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB,
-					comboBSemestreB, comboBCarreraB);
-			txtFNumcontrolB.setEditable(true);
+			
 			actualizarTablas(tablaB, mostrarTodosLosDatos);
 		}
 		if(e.getSource()==btnBuscarM){

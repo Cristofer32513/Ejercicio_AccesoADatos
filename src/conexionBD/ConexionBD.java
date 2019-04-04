@@ -25,16 +25,16 @@ public class ConexionBD {
 			conexion=DriverManager.getConnection(url, "root", "itsj");
 			
 			//System.out.println("Magia magia con BD, ya casi soy ISC  =)");
-			System.out.println("Conexion establecida con la BD...");
+			//System.out.println("Conexion establecida con la BD...");
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("No se encontro el controlador");
 			//System.out.println("Mejor me dedico a las redes ='(");
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("No se pudo conctar al servidor");
 			//System.out.println("Mejor me dedico a las redes ='(");
-			e.printStackTrace();
+			//e.printStackTrace();
 		} finally {
 			//Codigo que siempre se ejecuta
 			//cierre de la conexion a la BD, no se recomienda.
@@ -46,7 +46,7 @@ public class ConexionBD {
 			stm.close();
 			conexion.close();
 		} catch(SQLException e){
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
