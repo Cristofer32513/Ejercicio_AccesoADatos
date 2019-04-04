@@ -11,10 +11,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 
 @SuppressWarnings("serial")
-public class Ventana extends JFrame implements ActionListener {
+public class Ventana extends JFrame implements ActionListener, KeyListener {
 	
 	Font fuenteArial12Normal=new Font("Arial", 0, 12);
 	Font fuenteArial14Negrita=new Font("Arial", 1, 12);
@@ -51,7 +52,7 @@ public class Ventana extends JFrame implements ActionListener {
 	
 	
 	JInternalFrame internalFrameConsultaAlumnos;
-	JTextField txtFNumcontrolC, txtFNombresC, txtFApellidoPC, txtFApellidoMC;
+	JTextField txtFNombresC, txtFApellidoPC, txtFApellidoMC;
 	ButtonGroup grupoConsultas;
 	JRadioButton rbTodos, rbNombres, rbApellidoP, rbApellidoM, rbSemestre, rbCarrera;
 	JButton btnBuscarC, btnLimpiarC, btnCancelarC;
@@ -120,10 +121,12 @@ public class Ventana extends JFrame implements ActionListener {
 				JLabel lblNumControlA=new JLabel("NUMERO DE CONTROL:");
 					lblNumControlA.setBounds(100, 20, 160, 20);
 					lblNumControlA.setFont(fuenteArial12Normal);
+					lblNumControlA.addKeyListener(this);
 				panelComponentesAltaAlumos.add(lblNumControlA);
 				
 				txtFNumcontrolA=new JTextField();
 					txtFNumcontrolA.setBounds(240, 20, 200, 25);
+					txtFNumcontrolA.addKeyListener(this);
 				panelComponentesAltaAlumos.add(txtFNumcontrolA);
 				
 				
@@ -134,6 +137,7 @@ public class Ventana extends JFrame implements ActionListener {
 				
 				txtFNombresA=new JTextField();
 					txtFNombresA.setBounds(240, 55, 200, 25);
+					txtFNombresA.addKeyListener(this);
 				panelComponentesAltaAlumos.add(txtFNombresA);
 				
 				
@@ -144,6 +148,7 @@ public class Ventana extends JFrame implements ActionListener {
 				
 				txtFApellidoPA=new JTextField();
 					txtFApellidoPA.setBounds(240, 90, 200, 25);
+					txtFApellidoPA.addKeyListener(this);
 				panelComponentesAltaAlumos.add(txtFApellidoPA);
 				
 				
@@ -154,6 +159,7 @@ public class Ventana extends JFrame implements ActionListener {
 				
 				txtFApellidoMA=new JTextField();
 					txtFApellidoMA.setBounds(240, 125, 200, 25);
+					txtFApellidoMA.addKeyListener(this);
 				panelComponentesAltaAlumos.add(txtFApellidoMA);
 				
 				
@@ -168,6 +174,7 @@ public class Ventana extends JFrame implements ActionListener {
 						comboBSemestreA.addItem(String.valueOf(i));
 					comboBSemestreA.setBounds(240, 160, 200, 25);
 					comboBSemestreA.addActionListener(this);
+					comboBSemestreA.addKeyListener(this);
 				panelComponentesAltaAlumos.add(comboBSemestreA);
 				
 				
@@ -185,6 +192,7 @@ public class Ventana extends JFrame implements ActionListener {
 					comboBCarreraA.addItem("LA");
 					comboBCarreraA.setBounds(240, 195, 200, 25);
 					comboBCarreraA.addActionListener(this);
+					comboBCarreraA.addKeyListener(this);
 				panelComponentesAltaAlumos.add(comboBCarreraA);
 			
 				
@@ -271,6 +279,7 @@ public class Ventana extends JFrame implements ActionListener {
 				txtFNumcontrolB=new JTextField();
 					txtFNumcontrolB.setBounds(240, 20, 100, 30);
 					txtFNumcontrolB.setFont(fuenteArial14Negrita);
+					txtFNumcontrolB.addKeyListener(this);
 					panelComponentesBajaAlumos.add(txtFNumcontrolB);
 				
 				JLabel lblLineaB=new JLabel("___________________________________________________________________________________________");
@@ -435,6 +444,7 @@ public class Ventana extends JFrame implements ActionListener {
 				txtFNumcontrolM=new JTextField();
 					txtFNumcontrolM.setBounds(240, 20, 100, 30);
 					txtFNumcontrolM.setFont(fuenteArial14Negrita);
+					txtFNumcontrolM.addKeyListener(this);
 					panelComponentesModificacionesAlumos.add(txtFNumcontrolM);
 				
 				JLabel lblLineaM=new JLabel("___________________________________________________________________________________________");
@@ -450,6 +460,7 @@ public class Ventana extends JFrame implements ActionListener {
 				
 				txtFNombresM=new JTextField();
 					txtFNombresM.setBounds(240, 70, 200, 30);
+					txtFNombresM.addKeyListener(this);
 				panelComponentesModificacionesAlumos.add(txtFNombresM);
 				
 				
@@ -460,6 +471,7 @@ public class Ventana extends JFrame implements ActionListener {
 				
 				txtFApellidoPM=new JTextField();
 					txtFApellidoPM.setBounds(240, 110, 200, 30);
+					txtFApellidoPM.addKeyListener(this);
 				panelComponentesModificacionesAlumos.add(txtFApellidoPM);
 				
 				
@@ -470,6 +482,7 @@ public class Ventana extends JFrame implements ActionListener {
 				
 				txtFApellidoMM=new JTextField();
 					txtFApellidoMM.setBounds(240, 150, 200, 30);
+					txtFApellidoMM.addKeyListener(this);
 				panelComponentesModificacionesAlumos.add(txtFApellidoMM);
 				
 				
@@ -483,6 +496,7 @@ public class Ventana extends JFrame implements ActionListener {
 					for(int i=1;i<=10;i++)
 						comboBSemestreM.addItem(String.valueOf(i));
 					comboBSemestreM.setBounds(240, 190, 200, 30);
+					comboBSemestreM.addKeyListener(this);
 				panelComponentesModificacionesAlumos.add(comboBSemestreM);
 				
 				
@@ -500,6 +514,7 @@ public class Ventana extends JFrame implements ActionListener {
 					comboBCarreraM.addItem("ISC");
 					comboBCarreraM.addItem("LA");
 					comboBCarreraM.setBounds(240, 230, 200, 30);
+					comboBCarreraM.addKeyListener(this);
 				panelComponentesModificacionesAlumos.add(comboBCarreraM);
 				
 				
@@ -599,6 +614,7 @@ public class Ventana extends JFrame implements ActionListener {
 					
 					txtFNombresC=new JTextField();
 						txtFNombresC.setBounds(240, 30, 200, 30);
+						txtFNombresC.addKeyListener(this);
 					panelComponentesConsultasAlumos.add(txtFNombresC);
 					
 					
@@ -608,6 +624,7 @@ public class Ventana extends JFrame implements ActionListener {
 					
 					txtFApellidoPC=new JTextField();
 						txtFApellidoPC.setBounds(240, 70, 200, 30);
+						txtFApellidoPC.addKeyListener(this);
 					panelComponentesConsultasAlumos.add(txtFApellidoPC);
 				
 					
@@ -617,6 +634,7 @@ public class Ventana extends JFrame implements ActionListener {
 					
 					txtFApellidoMC=new JTextField();
 						txtFApellidoMC.setBounds(240, 110, 200, 30);
+						txtFApellidoMC.addKeyListener(this);
 					panelComponentesConsultasAlumos.add(txtFApellidoMC);
 				
 					
@@ -629,6 +647,7 @@ public class Ventana extends JFrame implements ActionListener {
 					for(int i=1;i<=10;i++)
 						comboBSemestreC.addItem(String.valueOf(i));
 					comboBSemestreC.setBounds(240, 150, 200, 30);
+					comboBSemestreC.addKeyListener(this);
 				panelComponentesConsultasAlumos.add(comboBSemestreC);
 				
 				
@@ -644,6 +663,7 @@ public class Ventana extends JFrame implements ActionListener {
 					comboBCarreraC.addItem("ISC");
 					comboBCarreraC.addItem("LA");
 					comboBCarreraC.setBounds(240, 190, 200, 30);
+					comboBCarreraC.addKeyListener(this);
 				panelComponentesConsultasAlumos.add(comboBCarreraC);
 		
 				
@@ -749,6 +769,7 @@ public class Ventana extends JFrame implements ActionListener {
 		}
 		else if(e.getSource()==itemConsultaAlumnos){
 			establecerComponentesDefaultConsulta();
+			actualizarTablas(tablaC, mostrarTodosLosDatos);
 			internalFrameConsultaAlumnos.setVisible(true);
 			internalFrameModificacionAlumnos.setVisible(false);
 			internalFrameBajaAlumnos.setVisible(false);
@@ -936,8 +957,11 @@ public class Ventana extends JFrame implements ActionListener {
 				else
 					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
 			}
-			if(tablaC.getRowCount()==0)
+			if(tablaC.getRowCount()==0){
 				JOptionPane.showMessageDialog(rootPane, "No se encontro ningun registro.");
+				actualizarTablas(tablaC, mostrarTodosLosDatos);
+			}
+				
 		}
 		else if(e.getSource()==btnLimpiarC){
 			establecerComponentesDefaultConsulta();
@@ -1065,5 +1089,79 @@ public class Ventana extends JFrame implements ActionListener {
 		}
 		
 		tabla.setModel(modeloDatos);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()==10){
+			if(e.getSource()==txtFNumcontrolA || e.getSource()==txtFNombresA || e.getSource()==txtFApellidoPA ||
+					e.getSource()==txtFApellidoMA || e.getSource()==comboBSemestreA || e.getSource()==comboBCarreraA)
+				btnAgregar.doClick();
+			
+			
+			else if(e.getSource()==txtFNumcontrolB){
+				if(txtFNumcontrolB.isEditable())
+					btnBuscarB.doClick();
+				else
+					btnEliminar.doClick();
+			}
+			
+			
+			else if(e.getSource()==txtFNumcontrolM)
+				btnBuscarM.doClick();
+			else if(e.getSource()==txtFNombresM || e.getSource()==txtFApellidoPM ||
+					e.getSource()==txtFApellidoMM || e.getSource()==comboBSemestreM ||
+					e.getSource()==comboBCarreraM)
+				btnGuardar.doClick();
+			
+			
+			else if(e.getSource()==txtFNombresC || e.getSource()==txtFApellidoPC ||
+					e.getSource()==txtFApellidoMC || e.getSource()==comboBSemestreC || e.getSource()==comboBCarreraC){
+				if(rbTodos.isSelected()){  //INICIO VERIFICACION DE COMPONENTE A HABILITAR
+					if(verificarEstadoComponentesConsulta())
+						btnBuscarC.doClick();
+					else
+						JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
+				}
+				else if(rbNombres.isSelected()){
+					if(!txtFNombresC.getText().equals(""))
+						btnBuscarC.doClick();
+					else
+						JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+				}
+				else if(rbApellidoP.isSelected()){
+					if(!txtFApellidoPC.getText().equals(""))
+						btnBuscarC.doClick();
+					else
+						JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+				}
+				else if(rbApellidoM.isSelected()){
+					if(!txtFApellidoMC.getText().equals(""))
+						btnBuscarC.doClick();
+					else
+						JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+				}
+				else if(rbSemestre.isSelected()){
+					if(comboBSemestreC.getSelectedIndex()!=0)
+						btnBuscarC.doClick();
+					else
+						JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+				}
+				else if(rbCarrera.isSelected()){
+					if(comboBCarreraC.getSelectedIndex()!=0)
+						btnBuscarC.doClick();
+					else
+						JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+				}  //FIN VERIFICACION DE COMPONENTE A HABILITAR
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
 	}
 }
