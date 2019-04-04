@@ -62,7 +62,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 	
 	public Ventana() {
 		getContentPane().setLayout(new BorderLayout());
-		setSize(900, 700);
+		setSize(766, 540);
 		setTitle("Alumnos");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -73,7 +73,6 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 		JMenuBar menuBar=new JMenuBar();
 			
 			menuPrincipalAlumnos=new JMenu("Alumnos");
-				
 				itemAltaAlumnos=new JMenuItem("Altas");
 				agregarItem(itemAltaAlumnos, KeyEvent.VK_A);
 					
@@ -88,7 +87,6 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				
 				itemConsultaAlumnos=new JMenuItem("Consultas");
 				agregarItem(itemConsultaAlumnos, KeyEvent.VK_C);
-				
 			menuBar.add(menuPrincipalAlumnos);
 								
 		setJMenuBar(menuBar);
@@ -225,17 +223,14 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				
 				tablaA = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
-					
 					nombreColumnas(tablaA, "NO. CONTROL", 0);
 					nombreColumnas(tablaA, "NOMBRE", 1);
 					nombreColumnas(tablaA, "AP. PATERNO", 2);
 					nombreColumnas(tablaA, "AP. MATERNO", 3);
 					nombreColumnas(tablaA, "SEMESTRE", 4);
 					nombreColumnas(tablaA, "CARRERA", 5);
-							       
-			        JScrollPane scrollA = new JScrollPane(tablaA);
-			        
-				panelTablaAltas.add(scrollA, BorderLayout.CENTER);
+					JScrollPane scrollA = new JScrollPane(tablaA);
+			    panelTablaAltas.add(scrollA, BorderLayout.CENTER);
 			
 			internalFrameAltaAlumnos.add(panelTablaAltas);
 			
@@ -390,17 +385,14 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				
 				tablaB = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
-					
 					nombreColumnas(tablaB, "NO. CONTROL", 0);
 					nombreColumnas(tablaB, "NOMBRE", 1);
 					nombreColumnas(tablaB, "AP. PATERNO", 2);
 					nombreColumnas(tablaB, "AP. MATERNO", 3);
 					nombreColumnas(tablaB, "SEMESTRE", 4);
 					nombreColumnas(tablaB, "CARRERA", 5);
-					
-			        JScrollPane scrollB = new JScrollPane(tablaB);
-			        
-				panelBTablaBajas.add(scrollB, BorderLayout.CENTER);
+					JScrollPane scrollB = new JScrollPane(tablaB);
+			    panelBTablaBajas.add(scrollB, BorderLayout.CENTER);
 			
 			internalFrameBajaAlumnos.add(panelBTablaBajas);
 			
@@ -554,17 +546,14 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				
 				tablaM = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
-					
 					nombreColumnas(tablaM, "NO. CONTROL", 0);
 					nombreColumnas(tablaM, "NOMBRE", 1);
 					nombreColumnas(tablaM, "AP. PATERNO", 2);
 					nombreColumnas(tablaM, "AP. MATERNO", 3);
 					nombreColumnas(tablaM, "SEMESTRE", 4);
 					nombreColumnas(tablaM, "CARRERA", 5);
-					
-			        JScrollPane scrollM = new JScrollPane(tablaM);
-			        
-				panelTablaModificaciones.add(scrollM, BorderLayout.CENTER);
+					JScrollPane scrollM = new JScrollPane(tablaM);
+			    panelTablaModificaciones.add(scrollM, BorderLayout.CENTER);
 			
 			internalFrameModificacionAlumnos.add(panelTablaModificaciones);
 			
@@ -643,12 +632,12 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 					grupoConsultas.add(rbSemestre);
 					
 					comboBSemestreC=new JComboBox<String>();
-					comboBSemestreC.addItem("Elegir Semestre ...");
-					for(int i=1;i<=10;i++)
-						comboBSemestreC.addItem(String.valueOf(i));
-					comboBSemestreC.setBounds(240, 150, 200, 30);
-					comboBSemestreC.addKeyListener(this);
-				panelComponentesConsultasAlumos.add(comboBSemestreC);
+						comboBSemestreC.addItem("Elegir Semestre ...");
+						for(int i=1;i<=10;i++)
+							comboBSemestreC.addItem(String.valueOf(i));
+						comboBSemestreC.setBounds(240, 150, 200, 30);
+						comboBSemestreC.addKeyListener(this);
+					panelComponentesConsultasAlumos.add(comboBSemestreC);
 				
 				
 				rbCarrera=new JRadioButton("CARRERA:");
@@ -699,17 +688,14 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				
 				tablaC = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
-					
 					nombreColumnas(tablaC, "NO. CONTROL", 0);
 					nombreColumnas(tablaC, "NOMBRE", 1);
 					nombreColumnas(tablaC, "AP. PATERNO", 2);
 					nombreColumnas(tablaC, "AP. MATERNO", 3);
 					nombreColumnas(tablaC, "SEMESTRE", 4);
 					nombreColumnas(tablaC, "CARRERA", 5);
-					
-			        JScrollPane scrollC = new JScrollPane(tablaC);
-			        
-				panelTablaConsultas.add(scrollC, BorderLayout.CENTER);
+					JScrollPane scrollC = new JScrollPane(tablaC);
+			    panelTablaConsultas.add(scrollC, BorderLayout.CENTER);
 			
 			internalFrameConsultaAlumnos.add(panelTablaConsultas);
 			
@@ -779,12 +765,9 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 		
 		if(e.getSource()==btnAgregar){  //INICIO EVENTOS DE INTERNALFRAMEALTAS
 			if(verificarEstadoComponentesAlta()){
-				alumno=new Alumno(txtFNumcontrolA.getText(), txtFNombresA.getText(), txtFApellidoPA.getText()
-						, txtFApellidoMA.getText(), (byte)Integer.parseInt(comboBSemestreA.getSelectedItem().toString())
-						, comboBCarreraA.getSelectedItem().toString());
+				alumno=new Alumno(txtFNumcontrolA.getText(), txtFNombresA.getText(), txtFApellidoPA.getText(), txtFApellidoMA.getText(), (byte)Integer.parseInt(comboBSemestreA.getSelectedItem().toString()), comboBCarreraA.getSelectedItem().toString());
 				
 				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolA.getText());
-				
 				if(al==null){
 					if(alumnoDao.agregarAlumno(alumno)){
 						JOptionPane.showMessageDialog(rootPane, "Alumno agregado correctamente.");
@@ -800,18 +783,16 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
 			actualizarTablas(tablaA, mostrarTodosLosDatos);
 		}
-		else if(e.getSource()==btnLimpiarA){
+		else if(e.getSource()==btnLimpiarA)
 			establecerComponentesDefaultAlta();
-		}
-		else if(e.getSource()==btnCancelarA){
+		else if(e.getSource()==btnCancelarA)
 			internalFrameAltaAlumnos.setVisible(false);
-		}  //FIN EVENTOS DE INTERNALFRAMEALTAS
+		//FIN EVENTOS DE INTERNALFRAMEALTAS
 		
 		
 		if(e.getSource()==btnBuscarB){  //INICIO EVENTOS DE INTERNALFRAMEBAJAS
 			if(!txtFNumcontrolB.getText().equals("")){
 				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolB.getText());
-				
 				if(al!=null){
 					txtFNombresB.setText(al.getNombre());
 					txtFApellidoPB.setText(al.getApellidoP());
@@ -836,16 +817,14 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				txtFNumcontrolB.setEditable(true);
 			}
 			else
-				JOptionPane.showMessageDialog(rootPane, "Error al eliminar el alumno.");
-			
+				JOptionPane.showMessageDialog(rootPane, "Error al eliminar el alumno.");	
 			actualizarTablas(tablaB, mostrarTodosLosDatos);
 		}
-		else if(e.getSource()==btnLimpiarB){
+		else if(e.getSource()==btnLimpiarB)
 			establecerComponentesDefaultBaja();
-		}
-		else if(e.getSource()==btnCancelarB){
+		else if(e.getSource()==btnCancelarB)
 			internalFrameBajaAlumnos.setVisible(false);
-		}  //FIN EVENTOS DE INTERNALFRAMEBAJAS
+		//FIN EVENTOS DE INTERNALFRAMEBAJAS
 					
 			
 		if(e.getSource()==btnBuscarM){  //INICIO EVENTOS DE INTERNALFRAMEMODIFICACIONES
@@ -867,9 +846,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 		}
 		else if(e.getSource()==btnGuardar){
 			if(verificarEstadoComponentesModificacion()){
-				alumno=new Alumno(txtFNumcontrolM.getText(), txtFNombresM.getText(), txtFApellidoPM.getText()
-						, txtFApellidoMM.getText(), (byte)Integer.parseInt(comboBSemestreM.getSelectedItem().toString())
-						, comboBCarreraM.getSelectedItem().toString());
+				alumno=new Alumno(txtFNumcontrolM.getText(), txtFNombresM.getText(), txtFApellidoPM.getText(), txtFApellidoMM.getText(), (byte)Integer.parseInt(comboBSemestreM.getSelectedItem().toString()), comboBCarreraM.getSelectedItem().toString());
 				
 				if(alumnoDao.modificarAlumno(alumno)){
 					JOptionPane.showMessageDialog(rootPane, "Cambios guardados correctamente.");
@@ -882,78 +859,63 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
 			actualizarTablas(tablaM, mostrarTodosLosDatos);
 		}
-		else if(e.getSource()==btnLimpiarM){
+		else if(e.getSource()==btnLimpiarM)
 			establecerComponentesDefaultModificacion();
-		}
-		else if(e.getSource()==btnCancelarM){
+		
+		else if(e.getSource()==btnCancelarM)
 			internalFrameModificacionAlumnos.setVisible(false);
-		}  //FIN EVENTOS DE INTERNALFRAMEBAJAS
+		//FIN EVENTOS DE INTERNALFRAMEBAJAS
 					
 		
-		if(e.getSource()==rbTodos){  //INICIO VERIFICACION DE COMPONENTE A HABILITAR
+		if(e.getSource()==rbTodos)//INICIO VERIFICACION DE COMPONENTE A HABILITAR
 			habilitarCamposConsulta(true, true, true, true, true, true);
-		}
-		else if(e.getSource()==rbNombres){
+		else if(e.getSource()==rbNombres)
 			habilitarCamposConsulta(true, false, false, false, false, true);
-		}
-		else if(e.getSource()==rbApellidoP){
+		else if(e.getSource()==rbApellidoP)
 			habilitarCamposConsulta(false, true, false, false, false, true);
-		}
-		else if(e.getSource()==rbApellidoM){
+		else if(e.getSource()==rbApellidoM)
 			habilitarCamposConsulta(false, false, true, false, false, true);
-		}
-		else if(e.getSource()==rbCarrera){
+		else if(e.getSource()==rbCarrera)
 			habilitarCamposConsulta(false, false, false, true, false, true);
-		}
-		else if(e.getSource()==rbSemestre){
+		else if(e.getSource()==rbSemestre)
 			habilitarCamposConsulta(false, false, false, false, true, true);
-		}  //FIN VERIFICACION DE COMPONENTE A HABILITAR
+		//FIN VERIFICACION DE COMPONENTE A HABILITAR
 		
 		
 		if(e.getSource()==btnBuscarC){  //INICIO EVENTOS DE INTERNALFRAMECONSULTAS
 			if(rbTodos.isSelected()){
-				if(verificarEstadoComponentesConsulta()){
-					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Nombre='"+txtFNombresC.getText()
-					+"' AND ApellidoP='"+txtFApellidoPC.getText()
-					+"' AND ApellidoM='"+txtFApellidoMC.getText()
-					+"' AND Semestre="+Integer.parseInt(comboBSemestreC.getSelectedItem().toString())
-					+" AND Carrera='"+comboBCarreraC.getSelectedItem().toString()+"'");
-				}
+				if(verificarEstadoComponentesConsulta())
+					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Nombre='"+txtFNombresC.getText()+"' AND ApellidoP='"+txtFApellidoPC.getText()+"' AND ApellidoM='"+txtFApellidoMC.getText()+"' AND Semestre="+Integer.parseInt(comboBSemestreC.getSelectedItem().toString())+" AND Carrera='"+comboBCarreraC.getSelectedItem().toString()+"'");
 				else
 					JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
 			}
 			else if(rbNombres.isSelected()){
-				if(!txtFNombresC.getText().equals("")){
+				if(!txtFNombresC.getText().equals(""))
 					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Nombre='"+txtFNombresC.getText()+"'");
-				}
 				else
 					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
 			}
 			else if(rbApellidoP.isSelected()){
-				if(!txtFApellidoPC.getText().equals("")){
+				if(!txtFApellidoPC.getText().equals(""))
 					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE ApellidoP='"+txtFApellidoPC.getText()+"'");
-				}
 				else
 					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
 			}
 			else if(rbApellidoM.isSelected()){
-				if(!txtFApellidoMC.getText().equals("")){
+				if(!txtFApellidoMC.getText().equals(""))
 					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE ApellidoM='"+txtFApellidoMC.getText()+"'");
-				}
 				else
 					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
 			}
 			else if(rbSemestre.isSelected()){
-				if(comboBSemestreC.getSelectedIndex()!=0){
+				if(comboBSemestreC.getSelectedIndex()!=0)
 					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Semestre="+Integer.parseInt(comboBSemestreC.getSelectedItem().toString()));
-				}
 				else
 					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
 			}
 			else if(rbCarrera.isSelected()){
-				if(comboBCarreraC.getSelectedIndex()!=0){
+				if(comboBCarreraC.getSelectedIndex()!=0)
 					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Carrera='"+comboBCarreraC.getSelectedItem().toString()+"'");
-				}
 				else
 					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
 			}
@@ -961,18 +923,17 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				JOptionPane.showMessageDialog(rootPane, "No se encontro ningun registro.");
 				actualizarTablas(tablaC, mostrarTodosLosDatos);
 			}
-				
 		}
-		else if(e.getSource()==btnLimpiarC){
+		else if(e.getSource()==btnLimpiarC)
 			establecerComponentesDefaultConsulta();
-		}
-		else if(e.getSource()==btnCancelarC){
+		else if(e.getSource()==btnCancelarC)
 			internalFrameConsultaAlumnos.setVisible(false);
-		}  //FIN EVENTOS DE INTERNALFRAMECONSULTAS
+		//FIN EVENTOS DE INTERNALFRAMECONSULTAS
 	}
 	
 	public boolean verificarEstadoComponentesAlta(){
 		boolean bandera=true;
+		
 		if(txtFNumcontrolA.getText().equals(""))
 			bandera=false;
 		if(txtFNombresA.getText().equals(""))
@@ -991,6 +952,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 	
 	public boolean verificarEstadoComponentesModificacion(){
 		boolean bandera=true;
+		
 		if(txtFNombresM.getText().equals(""))
 			bandera=false;
 		if(txtFApellidoPM.getText().equals(""))
@@ -1007,6 +969,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 	
 	public boolean verificarEstadoComponentesConsulta(){
 		boolean bandera=true;
+		
 		if(txtFNombresC.getText().equals(""))
 			bandera=false;
 		if(txtFApellidoPC.getText().equals(""))
@@ -1025,7 +988,6 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 		for(JComponent c : componentes){
 			if(c instanceof JTextField)
 				((JTextField) c).setText("");
-			
 			if(c instanceof JComboBox)
 				((JComboBox<?>) c).setSelectedIndex(0);
 		}		
@@ -1083,19 +1045,19 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 		try {
 			modeloDatos=new ResultSetTableModel(controlador, url, consulta);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		tabla.setModel(modeloDatos);
 	}
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==10){
-			if(e.getSource()==txtFNumcontrolA || e.getSource()==txtFNombresA || e.getSource()==txtFApellidoPA ||
-					e.getSource()==txtFApellidoMA || e.getSource()==comboBSemestreA || e.getSource()==comboBCarreraA)
+			if(e.getSource()==txtFNumcontrolA || e.getSource()==txtFNombresA || e.getSource()==txtFApellidoPA || e.getSource()==txtFApellidoMA || e.getSource()==comboBSemestreA || e.getSource()==comboBCarreraA)
 				btnAgregar.doClick();
 			
 			
@@ -1109,15 +1071,13 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 			
 			else if(e.getSource()==txtFNumcontrolM)
 				btnBuscarM.doClick();
-			else if(e.getSource()==txtFNombresM || e.getSource()==txtFApellidoPM ||
-					e.getSource()==txtFApellidoMM || e.getSource()==comboBSemestreM ||
-					e.getSource()==comboBCarreraM)
+			
+			else if(e.getSource()==txtFNombresM || e.getSource()==txtFApellidoPM || e.getSource()==txtFApellidoMM || e.getSource()==comboBSemestreM || e.getSource()==comboBCarreraM)
 				btnGuardar.doClick();
 			
 			
-			else if(e.getSource()==txtFNombresC || e.getSource()==txtFApellidoPC ||
-					e.getSource()==txtFApellidoMC || e.getSource()==comboBSemestreC || e.getSource()==comboBCarreraC){
-				if(rbTodos.isSelected()){  //INICIO VERIFICACION DE COMPONENTE A HABILITAR
+			else if(e.getSource()==txtFNombresC || e.getSource()==txtFApellidoPC || e.getSource()==txtFApellidoMC || e.getSource()==comboBSemestreC || e.getSource()==comboBCarreraC){
+				if(rbTodos.isSelected()){  //INICIO VERIFICACION DE COMPONENTE A JUSGAR
 					if(verificarEstadoComponentesConsulta())
 						btnBuscarC.doClick();
 					else
@@ -1152,16 +1112,16 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 						btnBuscarC.doClick();
 					else
 						JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
-				}  //FIN VERIFICACION DE COMPONENTE A HABILITAR
+				}  //FIN VERIFICACION DE COMPONENTE A JUSGAR
 			}
 		}
 	}
+	
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-	}
+	public void keyReleased(KeyEvent arg0) {}
+	
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-	}
+	public void keyTyped(KeyEvent arg0) {}
 }
