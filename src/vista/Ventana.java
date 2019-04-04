@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
-
 @SuppressWarnings("serial")
 public class Ventana extends JFrame implements ActionListener {
 	
@@ -598,50 +597,44 @@ public class Ventana extends JFrame implements ActionListener {
 						agregarRadioButton(panelComponentesConsultasAlumos, rbNombres, 90, 35, 100, 20, fuenteArial12Normal);
 					grupoConsultas.add(rbNombres);
 					
+					txtFNombresC=new JTextField();
+						txtFNombresC.setBounds(240, 30, 200, 30);
+					panelComponentesConsultasAlumos.add(txtFNombresC);
+					
 					
 					rbApellidoP=new JRadioButton("APELLIDO PATERNO:");
 						agregarRadioButton(panelComponentesConsultasAlumos, rbApellidoP, 90, 75, 150, 20, fuenteArial12Normal);
 					grupoConsultas.add(rbApellidoP);
 					
+					txtFApellidoPC=new JTextField();
+						txtFApellidoPC.setBounds(240, 70, 200, 30);
+					panelComponentesConsultasAlumos.add(txtFApellidoPC);
+				
 					
 					rbApellidoM=new JRadioButton("APELLIDO MATERNO:");
 						agregarRadioButton(panelComponentesConsultasAlumos, rbApellidoM, 90, 115, 150, 20, fuenteArial12Normal);
 					grupoConsultas.add(rbApellidoM);
 					
-					
-					rbCarrera=new JRadioButton("CARRERA:");
-						agregarRadioButton(panelComponentesConsultasAlumos, rbCarrera, 90, 155, 100, 20, fuenteArial12Normal);
-					grupoConsultas.add(rbCarrera);
-					
+					txtFApellidoMC=new JTextField();
+						txtFApellidoMC.setBounds(240, 110, 200, 30);
+					panelComponentesConsultasAlumos.add(txtFApellidoMC);
+				
 					
 					rbSemestre=new JRadioButton("SEMESTRE:");
-						agregarRadioButton(panelComponentesConsultasAlumos, rbSemestre, 90, 195, 100, 20, fuenteArial12Normal);
+						agregarRadioButton(panelComponentesConsultasAlumos, rbSemestre, 90, 155, 100, 20, fuenteArial12Normal);
 					grupoConsultas.add(rbSemestre);
 					
-				
-				
-				txtFNombresC=new JTextField();
-					txtFNombresC.setBounds(240, 30, 200, 30);
-				panelComponentesConsultasAlumos.add(txtFNombresC);
-				
-				
-				txtFApellidoPC=new JTextField();
-					txtFApellidoPC.setBounds(240, 70, 200, 30);
-				panelComponentesConsultasAlumos.add(txtFApellidoPC);
-				
-				
-				txtFApellidoMC=new JTextField();
-					txtFApellidoMC.setBounds(240, 110, 200, 30);
-				panelComponentesConsultasAlumos.add(txtFApellidoMC);
-				
-				
-				comboBSemestreC=new JComboBox<String>();
+					comboBSemestreC=new JComboBox<String>();
 					comboBSemestreC.addItem("Elegir Semestre ...");
 					for(int i=1;i<=10;i++)
 						comboBSemestreC.addItem(String.valueOf(i));
 					comboBSemestreC.setBounds(240, 150, 200, 30);
 				panelComponentesConsultasAlumos.add(comboBSemestreC);
 				
+				
+				rbCarrera=new JRadioButton("CARRERA:");
+					agregarRadioButton(panelComponentesConsultasAlumos, rbCarrera, 90, 195, 100, 20, fuenteArial12Normal);
+				grupoConsultas.add(rbCarrera);
 				
 				comboBCarreraC=new JComboBox<String>();
 					comboBCarreraC.addItem("Elegir Carrera ...");
@@ -652,6 +645,8 @@ public class Ventana extends JFrame implements ActionListener {
 					comboBCarreraC.addItem("LA");
 					comboBCarreraC.setBounds(240, 190, 200, 30);
 				panelComponentesConsultasAlumos.add(comboBCarreraC);
+		
+				
 				
 				
 				btnBuscarC=new JButton("BUSACAR");
@@ -726,6 +721,232 @@ public class Ventana extends JFrame implements ActionListener {
 		menuPrincipalAlumnos.add(item);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==itemAltaAlumnos){  //INICIO EVENTOS DE INTERNALSFRAMES
+			actualizarTablas(tablaA, mostrarTodosLosDatos);
+			establecerComponentesDefaultAlta();
+			internalFrameAltaAlumnos.setVisible(true);
+			internalFrameBajaAlumnos.setVisible(false);
+			internalFrameModificacionAlumnos.setVisible(false);
+			internalFrameConsultaAlumnos.setVisible(false);
+		}
+		else if(e.getSource()==itemBajaAlumnos){
+			actualizarTablas(tablaB, mostrarTodosLosDatos);
+			establecerComponentesDefaultBaja();
+			internalFrameBajaAlumnos.setVisible(true);
+			internalFrameAltaAlumnos.setVisible(false);
+			internalFrameModificacionAlumnos.setVisible(false);
+			internalFrameConsultaAlumnos.setVisible(false);
+		}
+		else if(e.getSource()==itemModificacionAlumnos){
+			actualizarTablas(tablaM, mostrarTodosLosDatos);
+			establecerComponentesDefaultModificacion();
+			internalFrameModificacionAlumnos.setVisible(true);
+			internalFrameBajaAlumnos.setVisible(false);
+			internalFrameAltaAlumnos.setVisible(false);
+			internalFrameConsultaAlumnos.setVisible(false);
+		}
+		else if(e.getSource()==itemConsultaAlumnos){
+			establecerComponentesDefaultConsulta();
+			internalFrameConsultaAlumnos.setVisible(true);
+			internalFrameModificacionAlumnos.setVisible(false);
+			internalFrameBajaAlumnos.setVisible(false);
+			internalFrameAltaAlumnos.setVisible(false);
+		}  //FIN EVENTOS DE INTERNALSFRAMES
+		
+		
+		if(e.getSource()==btnAgregar){  //INICIO EVENTOS DE INTERNALFRAMEALTAS
+			if(verificarEstadoComponentesAlta()){
+				alumno=new Alumno(txtFNumcontrolA.getText(), txtFNombresA.getText(), txtFApellidoPA.getText()
+						, txtFApellidoMA.getText(), (byte)Integer.parseInt(comboBSemestreA.getSelectedItem().toString())
+						, comboBCarreraA.getSelectedItem().toString());
+				
+				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolA.getText());
+				
+				if(al==null){
+					if(alumnoDao.agregarAlumno(alumno)){
+						JOptionPane.showMessageDialog(rootPane, "Alumno agregado correctamente.");
+						establecerComponentesDefaultAlta();
+					}
+					else
+						JOptionPane.showMessageDialog(rootPane, "Error al agregar el alumno.");
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "El numero de control ingresado ya existe.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
+			actualizarTablas(tablaA, mostrarTodosLosDatos);
+		}
+		else if(e.getSource()==btnLimpiarA){
+			establecerComponentesDefaultAlta();
+		}
+		else if(e.getSource()==btnCancelarA){
+			internalFrameAltaAlumnos.setVisible(false);
+		}  //FIN EVENTOS DE INTERNALFRAMEALTAS
+		
+		
+		if(e.getSource()==btnBuscarB){  //INICIO EVENTOS DE INTERNALFRAMEBAJAS
+			if(!txtFNumcontrolB.getText().equals("")){
+				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolB.getText());
+				
+				if(al!=null){
+					txtFNombresB.setText(al.getNombre());
+					txtFApellidoPB.setText(al.getApellidoP());
+					txtFApellidoMB.setText(al.getApellidoM());
+					comboBSemestreB.setSelectedItem(String.valueOf(al.getSemestre()));
+					comboBCarreraB.setSelectedItem(al.getCarrera());
+					btnEliminar.setEnabled(true);
+					txtFNumcontrolB.setEditable(false);
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "No se encotro al alumno.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Ingresa un numero de control a buscar.");
+		}
+		else if(e.getSource()==btnEliminar){
+			if(alumnoDao.eliminarAlumno(txtFNumcontrolB.getText())){
+				JOptionPane.showMessageDialog(rootPane, "Alumno eliminado correctamente.");
+				establecerComponentesDefaultBaja();
+				btnEliminar.setEnabled(false);
+				txtFNumcontrolB.setEditable(true);
+				txtFNumcontrolB.setEditable(true);
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Error al eliminar el alumno.");
+			
+			actualizarTablas(tablaB, mostrarTodosLosDatos);
+		}
+		else if(e.getSource()==btnLimpiarB){
+			establecerComponentesDefaultBaja();
+		}
+		else if(e.getSource()==btnCancelarB){
+			internalFrameBajaAlumnos.setVisible(false);
+		}  //FIN EVENTOS DE INTERNALFRAMEBAJAS
+					
+			
+		if(e.getSource()==btnBuscarM){  //INICIO EVENTOS DE INTERNALFRAMEMODIFICACIONES
+			if(!txtFNumcontrolM.getText().equals("")){
+				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolM.getText());
+				if(al!=null){
+					txtFNombresM.setText(al.getNombre());
+					txtFApellidoPM.setText(al.getApellidoP());
+					txtFApellidoMM.setText(al.getApellidoM());
+					comboBSemestreM.setSelectedItem(String.valueOf(al.getSemestre()));
+					comboBCarreraM.setSelectedItem(al.getCarrera());
+					habilitarCamposModificacion(true);
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "No se encotro al alumno.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Ingresa un numero de control a buscar.");
+		}
+		else if(e.getSource()==btnGuardar){
+			if(verificarEstadoComponentesModificacion()){
+				alumno=new Alumno(txtFNumcontrolM.getText(), txtFNombresM.getText(), txtFApellidoPM.getText()
+						, txtFApellidoMM.getText(), (byte)Integer.parseInt(comboBSemestreM.getSelectedItem().toString())
+						, comboBCarreraM.getSelectedItem().toString());
+				
+				if(alumnoDao.modificarAlumno(alumno)){
+					JOptionPane.showMessageDialog(rootPane, "Cambios guardados correctamente.");
+					establecerComponentesDefaultModificacion();
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "Error al gurdar los cambios.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
+			actualizarTablas(tablaM, mostrarTodosLosDatos);
+		}
+		else if(e.getSource()==btnLimpiarM){
+			establecerComponentesDefaultModificacion();
+		}
+		else if(e.getSource()==btnCancelarM){
+			internalFrameModificacionAlumnos.setVisible(false);
+		}  //FIN EVENTOS DE INTERNALFRAMEBAJAS
+					
+		
+		if(e.getSource()==rbTodos){  //INICIO VERIFICACION DE COMPONENTE A HABILITAR
+			habilitarCamposConsulta(true, true, true, true, true, true);
+		}
+		else if(e.getSource()==rbNombres){
+			habilitarCamposConsulta(true, false, false, false, false, true);
+		}
+		else if(e.getSource()==rbApellidoP){
+			habilitarCamposConsulta(false, true, false, false, false, true);
+		}
+		else if(e.getSource()==rbApellidoM){
+			habilitarCamposConsulta(false, false, true, false, false, true);
+		}
+		else if(e.getSource()==rbCarrera){
+			habilitarCamposConsulta(false, false, false, true, false, true);
+		}
+		else if(e.getSource()==rbSemestre){
+			habilitarCamposConsulta(false, false, false, false, true, true);
+		}  //FIN VERIFICACION DE COMPONENTE A HABILITAR
+		
+		
+		if(e.getSource()==btnBuscarC){  //INICIO EVENTOS DE INTERNALFRAMECONSULTAS
+			if(rbTodos.isSelected()){
+				if(verificarEstadoComponentesConsulta()){
+					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Nombre='"+txtFNombresC.getText()
+					+"' AND ApellidoP='"+txtFApellidoPC.getText()
+					+"' AND ApellidoM='"+txtFApellidoMC.getText()
+					+"' AND Semestre="+Integer.parseInt(comboBSemestreC.getSelectedItem().toString())
+					+" AND Carrera='"+comboBCarreraC.getSelectedItem().toString()+"'");
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
+			}
+			else if(rbNombres.isSelected()){
+				if(!txtFNombresC.getText().equals("")){
+					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Nombre='"+txtFNombresC.getText()+"'");
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+			}
+			else if(rbApellidoP.isSelected()){
+				if(!txtFApellidoPC.getText().equals("")){
+					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE ApellidoP='"+txtFApellidoPC.getText()+"'");
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+			}
+			else if(rbApellidoM.isSelected()){
+				if(!txtFApellidoMC.getText().equals("")){
+					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE ApellidoM='"+txtFApellidoMC.getText()+"'");
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+			}
+			else if(rbSemestre.isSelected()){
+				if(comboBSemestreC.getSelectedIndex()!=0){
+					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Semestre="+Integer.parseInt(comboBSemestreC.getSelectedItem().toString()));
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+			}
+			else if(rbCarrera.isSelected()){
+				if(comboBCarreraC.getSelectedIndex()!=0){
+					actualizarTablas(tablaC, "SELECT * FROM Alumnos3 WHERE Carrera='"+comboBCarreraC.getSelectedItem().toString()+"'");
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "El campo esta vacio.");
+			}
+			if(tablaC.getRowCount()==0)
+				JOptionPane.showMessageDialog(rootPane, "No se encontro ningun registro.");
+		}
+		else if(e.getSource()==btnLimpiarC){
+			establecerComponentesDefaultConsulta();
+		}
+		else if(e.getSource()==btnCancelarC){
+			internalFrameConsultaAlumnos.setVisible(false);
+		}  //FIN EVENTOS DE INTERNALFRAMECONSULTAS
+	}
+	
 	public boolean verificarEstadoComponentesAlta(){
 		boolean bandera=true;
 		if(txtFNumcontrolA.getText().equals(""))
@@ -760,166 +981,20 @@ public class Ventana extends JFrame implements ActionListener {
 		return bandera;
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==itemAltaAlumnos){
-			actualizarTablas(tablaA, mostrarTodosLosDatos);
-			internalFrameAltaAlumnos.setVisible(true);
-			internalFrameBajaAlumnos.setVisible(false);
-			internalFrameModificacionAlumnos.setVisible(false);
-			internalFrameConsultaAlumnos.setVisible(false);
-		}
-		if(e.getSource()==itemBajaAlumnos){
-			actualizarTablas(tablaB, mostrarTodosLosDatos);
-			internalFrameBajaAlumnos.setVisible(true);
-			internalFrameAltaAlumnos.setVisible(false);
-			internalFrameModificacionAlumnos.setVisible(false);
-			internalFrameConsultaAlumnos.setVisible(false);
-		}
-		if(e.getSource()==itemModificacionAlumnos){
-			actualizarTablas(tablaM, mostrarTodosLosDatos);
-			internalFrameModificacionAlumnos.setVisible(true);
-			internalFrameBajaAlumnos.setVisible(false);
-			internalFrameAltaAlumnos.setVisible(false);
-			internalFrameConsultaAlumnos.setVisible(false);
-		}
-		if(e.getSource()==itemConsultaAlumnos){
-			internalFrameConsultaAlumnos.setVisible(true);
-			internalFrameModificacionAlumnos.setVisible(false);
-			internalFrameBajaAlumnos.setVisible(false);
-			internalFrameAltaAlumnos.setVisible(false);
-		}
-		if(e.getSource()==btnAgregar){
-			if(verificarEstadoComponentesAlta()){
-				alumno=new Alumno(txtFNumcontrolA.getText(), txtFNombresA.getText(), txtFApellidoPA.getText()
-						, txtFApellidoMA.getText(), (byte)Integer.parseInt(comboBSemestreA.getSelectedItem().toString())
-						, comboBCarreraA.getSelectedItem().toString());
-				
-				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolA.getText());
-				
-				if(al==null){
-					if(alumnoDao.agregarAlumno(alumno)){
-						JOptionPane.showMessageDialog(rootPane, "Alumno agregado correctamente.");
-						restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA,
-								comboBSemestreA, comboBCarreraA);
-					}
-					else
-						JOptionPane.showMessageDialog(rootPane, "Error al agregar el alumno.");
-				}
-				else
-					JOptionPane.showMessageDialog(rootPane, "El numero de control ingresado ya existe.");
-			}
-			else
-				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
-			actualizarTablas(tablaA, mostrarTodosLosDatos);
-		}
-		if(e.getSource()==btnBuscarB){
-			if(!txtFNumcontrolB.getText().equals("")){
-				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolB.getText());
-				
-				if(al!=null){
-					txtFNombresB.setText(al.getNombre());
-					txtFApellidoPB.setText(al.getApellidoP());
-					txtFApellidoMB.setText(al.getApellidoM());
-					comboBSemestreB.setSelectedItem(String.valueOf(al.getSemestre()));
-					comboBCarreraB.setSelectedItem(al.getCarrera());
-					btnEliminar.setEnabled(true);
-					txtFNumcontrolB.setEditable(false);
-				}
-				else
-					JOptionPane.showMessageDialog(rootPane, "No se encotro al alumno.");
-			}
-			else
-				JOptionPane.showMessageDialog(rootPane, "Ingresa un numero de control a buscar.");
-		}
-		if(e.getSource()==btnEliminar){
-			if(alumnoDao.eliminarAlumno(txtFNumcontrolB.getText())){
-				JOptionPane.showMessageDialog(rootPane, "Alumno eliminado correctamente.");
-				restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB,
-						comboBSemestreB, comboBCarreraB);
-				btnEliminar.setEnabled(false);
-				txtFNumcontrolB.setEditable(true);
-				txtFNumcontrolB.setEditable(true);
-			}
-			else
-				JOptionPane.showMessageDialog(rootPane, "Error al eliminar el alumno.");
-			
-			actualizarTablas(tablaB, mostrarTodosLosDatos);
-		}
-		if(e.getSource()==btnBuscarM){
-			if(!txtFNumcontrolM.getText().equals("")){
-				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolM.getText());
-				if(al!=null){
-					txtFNombresM.setText(al.getNombre());
-					txtFApellidoPM.setText(al.getApellidoP());
-					txtFApellidoMM.setText(al.getApellidoM());
-					comboBSemestreM.setSelectedItem(String.valueOf(al.getSemestre()));
-					comboBCarreraM.setSelectedItem(al.getCarrera());
-					txtFNumcontrolM.setEditable(false);
-				}
-				else
-					JOptionPane.showMessageDialog(rootPane, "No se encotro al alumno.");
-			}
-			else
-				JOptionPane.showMessageDialog(rootPane, "Ingresa un numero de control a buscar.");
-		}
-		if(e.getSource()==btnGuardar){
-			if(verificarEstadoComponentesModificacion()){
-				alumno=new Alumno(txtFNumcontrolM.getText(), txtFNombresM.getText(), txtFApellidoPM.getText()
-						, txtFApellidoMM.getText(), (byte)Integer.parseInt(comboBSemestreM.getSelectedItem().toString())
-						, comboBCarreraM.getSelectedItem().toString());
-				
-				if(alumnoDao.modificarAlumno(alumno)){
-					JOptionPane.showMessageDialog(rootPane, "Cambios guardados correctamente.");
-					restablecerCompontes(txtFNumcontrolM, txtFNombresM, txtFApellidoPM, txtFApellidoMM,
-							comboBSemestreM, comboBCarreraM);
-					txtFNumcontrolM.setEditable(true);
-				}
-				else
-					JOptionPane.showMessageDialog(rootPane, "Error al gurdar los cambios.");
-			}
-			else
-				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
-			actualizarTablas(tablaM, mostrarTodosLosDatos);
-		}
-		if(e.getSource()==btnLimpiarA){
-			restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA,
-					comboBSemestreA, comboBCarreraA);
-		}
-		if(e.getSource()==btnLimpiarB){
-			restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB,
-					comboBSemestreB, comboBCarreraB);
-			btnEliminar.setEnabled(false);
-			txtFNumcontrolB.setEditable(true);
-		}
-		if(e.getSource()==btnLimpiarM){
-			restablecerCompontes(txtFNumcontrolM, txtFNombresM, txtFApellidoPM, txtFApellidoMM,
-					comboBSemestreM, comboBCarreraM);
-		}
-		if(e.getSource()==btnLimpiarC){
-			restablecerCompontes(txtFNombresC, txtFApellidoPC, txtFApellidoMC,
-					comboBSemestreC, comboBCarreraC);
-		}
-		if(e.getSource()==btnCancelarA){
-			restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA,
-					comboBSemestreA, comboBCarreraA);
-			internalFrameAltaAlumnos.setVisible(false);
-		}
-		if(e.getSource()==btnCancelarB){
-			restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB,
-					comboBSemestreB, comboBCarreraB);
-			internalFrameBajaAlumnos.setVisible(false);
-		}
-		if(e.getSource()==btnCancelarM){
-			restablecerCompontes(txtFNumcontrolM, txtFNombresM, txtFApellidoPM, txtFApellidoMM,
-					comboBSemestreM, comboBCarreraM);
-			internalFrameModificacionAlumnos.setVisible(false);
-		}
-		if(e.getSource()==btnCancelarC){
-			restablecerCompontes(txtFNombresC, txtFApellidoPC, txtFApellidoMC,
-					comboBSemestreC, comboBCarreraC);
-			internalFrameConsultaAlumnos.setVisible(false);
-		}
+	public boolean verificarEstadoComponentesConsulta(){
+		boolean bandera=true;
+		if(txtFNombresC.getText().equals(""))
+			bandera=false;
+		if(txtFApellidoPC.getText().equals(""))
+			bandera=false;
+		if(txtFApellidoMC.getText().equals(""))
+			bandera=false;
+		if(comboBSemestreC.getSelectedIndex()==0)
+			bandera=false;
+		if(comboBCarreraC.getSelectedIndex()==0)
+			bandera=false;
+		
+		return bandera;
 	}
 	
 	public void restablecerCompontes(JComponent...componentes){
@@ -930,6 +1005,50 @@ public class Ventana extends JFrame implements ActionListener {
 			if(c instanceof JComboBox)
 				((JComboBox<?>) c).setSelectedIndex(0);
 		}		
+	}
+	
+	public void establecerComponentesDefaultAlta(){
+		restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA, comboBSemestreA, comboBCarreraA);
+	}
+	
+	public void establecerComponentesDefaultBaja(){
+		restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB, comboBSemestreB, comboBCarreraB);
+		btnEliminar.setEnabled(false);
+		txtFNumcontrolB.setEditable(true);
+	}
+	
+	public void establecerComponentesDefaultModificacion(){
+		restablecerCompontes(txtFNumcontrolM, txtFNombresM, txtFApellidoPM, txtFApellidoMM, comboBSemestreM, comboBCarreraM);
+		habilitarCamposModificacion(false);
+	}
+	
+	public void habilitarCamposModificacion(boolean habilitado){
+		txtFNumcontrolM.setEnabled(!habilitado);
+		txtFNombresM.setEnabled(habilitado);
+		txtFApellidoPM.setEnabled(habilitado);
+		txtFApellidoMM.setEnabled(habilitado);
+		comboBSemestreM.setEnabled(habilitado);
+		comboBCarreraM.setEnabled(habilitado);
+	}
+	
+	public void establecerComponentesDefaultConsulta(){
+		restablecerCompontes(txtFNombresC, txtFApellidoPC, txtFApellidoMC, comboBSemestreC, comboBCarreraC);
+		habilitarCamposConsulta(false, false, false, false, false, false);
+		grupoConsultas.clearSelection();
+	}
+	
+	public void habilitarCamposConsulta(boolean nom, boolean apP, boolean apM, boolean carr, boolean sem, boolean boton){
+		txtFNombresC.setEnabled(nom);
+		txtFNombresC.setText("");
+		txtFApellidoPC.setEnabled(apP);
+		txtFApellidoPC.setText("");
+		txtFApellidoMC.setEnabled(apM);
+		txtFApellidoMC.setText("");
+		comboBSemestreC.setEnabled(sem);
+		comboBSemestreC.setSelectedIndex(0);
+		comboBCarreraC.setEnabled(carr);
+		comboBCarreraC.setSelectedIndex(0);
+		btnBuscarC.setEnabled(boton);
 	}
 	
 	public void actualizarTablas(JTable tabla, String consulta){
