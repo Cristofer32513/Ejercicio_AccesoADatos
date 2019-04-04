@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import controlador.AlumnoDAO;
+import modelo.Alumno;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,10 @@ public class Ventana extends JFrame implements ActionListener {
 	Font fuenteArial12Normal=new Font("Arial", 0, 12);
 	Font fuenteArial14Negrita=new Font("Arial", 1, 12);
 	
-	final static String mostrarTodosLosDatos="SELECT * FROM Alumnos2";
+	final static String mostrarTodosLosDatos="SELECT * FROM Alumnos3";
+	
+	Alumno alumno;
+	final static AlumnoDAO alumnoDao=new AlumnoDAO();
 	
 	JMenu menuPrincipalAlumnos;
 	JMenuItem itemAltaAlumnos, itemBajaAlumnos, itemModificacionAlumnos, itemConsultaAlumnos;
@@ -163,6 +168,7 @@ public class Ventana extends JFrame implements ActionListener {
 					for(int i=1;i<=10;i++)
 						comboBSemestreA.addItem(String.valueOf(i));
 					comboBSemestreA.setBounds(240, 160, 200, 25);
+					comboBSemestreA.addActionListener(this);
 				panelComponentesAltaAlumos.add(comboBSemestreA);
 				
 				
@@ -179,12 +185,14 @@ public class Ventana extends JFrame implements ActionListener {
 					comboBCarreraA.addItem("ISC");
 					comboBCarreraA.addItem("LA");
 					comboBCarreraA.setBounds(240, 195, 200, 25);
+					comboBCarreraA.addActionListener(this);
 				panelComponentesAltaAlumos.add(comboBCarreraA);
 			
 				
 				btnAgregar=new JButton("AGREGAR");
 					btnAgregar.setBounds(500, 35, 110, 20);
 					btnAgregar.setFont(new Font("Time New Romans", 0, 12));
+					btnAgregar.addActionListener(this);
 				panelComponentesAltaAlumos.add(btnAgregar);
 				
 				
@@ -208,16 +216,15 @@ public class Ventana extends JFrame implements ActionListener {
 				panelTablaAltas.setLayout(new BorderLayout());
 				panelTablaAltas.setBounds(25, 300, 680, 120);
 				
-				tablaA = new JTable(6,7);
+				tablaA = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaA, "NO. CONTROL", 0);
 					nombreColumnas(tablaA, "NOMBRE", 1);
 					nombreColumnas(tablaA, "AP. PATERNO", 2);
 					nombreColumnas(tablaA, "AP. MATERNO", 3);
-					nombreColumnas(tablaA, "EDAD", 4);
-					nombreColumnas(tablaA, "SEMESTRE", 5);
-					nombreColumnas(tablaA, "CARRERA", 6);
+					nombreColumnas(tablaA, "SEMESTRE", 4);
+					nombreColumnas(tablaA, "CARRERA", 5);
 							       
 			        JScrollPane scrollA = new JScrollPane(tablaA);
 			        
@@ -338,11 +345,11 @@ public class Ventana extends JFrame implements ActionListener {
 				panelComponentesBajaAlumos.add(comboBCarreraB);
 				
 				
-				btnCancelarB=new JButton("BUSACAR");
-					btnCancelarB.setBounds(400, 15, 110, 40);
-					btnCancelarB.setFont(fuenteArial12Normal);
-					btnCancelarB.addActionListener(this);
-				panelComponentesBajaAlumos.add(btnCancelarB);
+				btnBuscarB=new JButton("BUSACAR");
+					btnBuscarB.setBounds(400, 15, 110, 40);
+					btnBuscarB.setFont(fuenteArial12Normal);
+					btnBuscarB.addActionListener(this);
+				panelComponentesBajaAlumos.add(btnBuscarB);
 				
 				
 				btnLimpiarB=new JButton("LIMPIAR");
@@ -356,6 +363,7 @@ public class Ventana extends JFrame implements ActionListener {
 					btnEliminar.setBounds(500, 115, 110, 20);
 					btnEliminar.setFont(fuenteArial12Normal);
 					btnEliminar.addActionListener(this);
+					btnEliminar.setEnabled(false);
 				panelComponentesBajaAlumos.add(btnEliminar);
 				
 				
@@ -372,16 +380,15 @@ public class Ventana extends JFrame implements ActionListener {
 				panelBTablaBajas.setLayout(new BorderLayout());
 				panelBTablaBajas.setBounds(25, 320, 680, 120);
 				
-				tablaB = new JTable(6,7);
+				tablaB = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaB, "NO. CONTROL", 0);
 					nombreColumnas(tablaB, "NOMBRE", 1);
 					nombreColumnas(tablaB, "AP. PATERNO", 2);
 					nombreColumnas(tablaB, "AP. MATERNO", 3);
-					nombreColumnas(tablaB, "EDAD", 4);
-					nombreColumnas(tablaB, "SEMESTRE", 5);
-					nombreColumnas(tablaB, "CARRERA", 6);
+					nombreColumnas(tablaB, "SEMESTRE", 4);
+					nombreColumnas(tablaB, "CARRERA", 5);
 					
 			        JScrollPane scrollB = new JScrollPane(tablaB);
 			        
@@ -497,11 +504,11 @@ public class Ventana extends JFrame implements ActionListener {
 				panelComponentesModificacionesAlumos.add(comboBCarreraM);
 				
 				
-				btnCancelarM=new JButton("BUSACAR");
-					btnCancelarM.setBounds(400, 15, 110, 40);
-					btnCancelarM.setFont(fuenteArial12Normal);
-					btnCancelarM.addActionListener(this);
-				panelComponentesModificacionesAlumos.add(btnCancelarM);
+				btnBuscarM=new JButton("BUSACAR");
+					btnBuscarM.setBounds(400, 15, 110, 40);
+					btnBuscarM.setFont(fuenteArial12Normal);
+					btnBuscarM.addActionListener(this);
+				panelComponentesModificacionesAlumos.add(btnBuscarM);
 				
 				
 				btnLimpiarM=new JButton("LIMPIAR");
@@ -531,16 +538,15 @@ public class Ventana extends JFrame implements ActionListener {
 				panelTablaModificaciones.setLayout(new BorderLayout());
 				panelTablaModificaciones.setBounds(25, 320, 680, 120);
 				
-				tablaM = new JTable(6,7);
+				tablaM = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaM, "NO. CONTROL", 0);
 					nombreColumnas(tablaM, "NOMBRE", 1);
 					nombreColumnas(tablaM, "AP. PATERNO", 2);
 					nombreColumnas(tablaM, "AP. MATERNO", 3);
-					nombreColumnas(tablaM, "EDAD", 4);
-					nombreColumnas(tablaM, "SEMESTRE", 5);
-					nombreColumnas(tablaM, "CARRERA", 6);
+					nombreColumnas(tablaM, "SEMESTRE", 4);
+					nombreColumnas(tablaM, "CARRERA", 5);
 					
 			        JScrollPane scrollM = new JScrollPane(tablaM);
 			        
@@ -652,6 +658,7 @@ public class Ventana extends JFrame implements ActionListener {
 					btnBuscarC.setBounds(500, 65, 110, 40);
 					btnBuscarC.setFont(fuenteArial12Normal);
 					btnBuscarC.addActionListener(this);
+					btnBuscarC.setEnabled(false);
 				panelComponentesConsultasAlumos.add(btnBuscarC);
 				
 				
@@ -675,16 +682,15 @@ public class Ventana extends JFrame implements ActionListener {
 				panelTablaConsultas.setLayout(new BorderLayout());
 				panelTablaConsultas.setBounds(25, 315, 680, 120);
 				
-				tablaC = new JTable(6,7);
+				tablaC = new JTable(6,6);
 				modeloTabla = (DefaultTableModel) tablaA.getModel();
 					
 					nombreColumnas(tablaC, "NO. CONTROL", 0);
 					nombreColumnas(tablaC, "NOMBRE", 1);
 					nombreColumnas(tablaC, "AP. PATERNO", 2);
 					nombreColumnas(tablaC, "AP. MATERNO", 3);
-					nombreColumnas(tablaC, "EDAD", 4);
-					nombreColumnas(tablaC, "SEMESTRE", 5);
-					nombreColumnas(tablaC, "CARRERA", 6);
+					nombreColumnas(tablaC, "SEMESTRE", 4);
+					nombreColumnas(tablaC, "CARRERA", 5);
 					
 			        JScrollPane scrollC = new JScrollPane(tablaC);
 			        
@@ -720,11 +726,44 @@ public class Ventana extends JFrame implements ActionListener {
 		menuPrincipalAlumnos.add(item);
 	}
 
+	public boolean verificarEstadoComponentesAlta(){
+		boolean bandera=true;
+		if(txtFNumcontrolA.getText().equals(""))
+			bandera=false;
+		if(txtFNombresA.getText().equals(""))
+			bandera=false;
+		if(txtFApellidoPA.getText().equals(""))
+			bandera=false;
+		if(txtFApellidoMA.getText().equals(""))
+			bandera=false;
+		if(comboBSemestreA.getSelectedIndex()==0)
+			bandera=false;
+		if(comboBCarreraA.getSelectedIndex()==0)
+			bandera=false;
+		
+		return bandera;
+	}
+	
+	public boolean verificarEstadoComponentesModificacion(){
+		boolean bandera=true;
+		if(txtFNombresM.getText().equals(""))
+			bandera=false;
+		if(txtFApellidoPM.getText().equals(""))
+			bandera=false;
+		if(txtFApellidoMM.getText().equals(""))
+			bandera=false;
+		if(comboBSemestreM.getSelectedIndex()==0)
+			bandera=false;
+		if(comboBCarreraM.getSelectedIndex()==0)
+			bandera=false;
+		
+		return bandera;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==itemAltaAlumnos){
 			actualizarTablas(tablaA, mostrarTodosLosDatos);
-			
 			internalFrameAltaAlumnos.setVisible(true);
 			internalFrameBajaAlumnos.setVisible(false);
 			internalFrameModificacionAlumnos.setVisible(false);
@@ -732,25 +771,111 @@ public class Ventana extends JFrame implements ActionListener {
 		}
 		if(e.getSource()==itemBajaAlumnos){
 			actualizarTablas(tablaB, mostrarTodosLosDatos);
-			
 			internalFrameBajaAlumnos.setVisible(true);
 			internalFrameAltaAlumnos.setVisible(false);
 			internalFrameModificacionAlumnos.setVisible(false);
 			internalFrameConsultaAlumnos.setVisible(false);
 		}
-		if	(e.getSource()==itemModificacionAlumnos){
+		if(e.getSource()==itemModificacionAlumnos){
 			actualizarTablas(tablaM, mostrarTodosLosDatos);
-			
 			internalFrameModificacionAlumnos.setVisible(true);
 			internalFrameBajaAlumnos.setVisible(false);
 			internalFrameAltaAlumnos.setVisible(false);
 			internalFrameConsultaAlumnos.setVisible(false);
 		}
-		if	(e.getSource()==itemConsultaAlumnos){
+		if(e.getSource()==itemConsultaAlumnos){
 			internalFrameConsultaAlumnos.setVisible(true);
 			internalFrameModificacionAlumnos.setVisible(false);
 			internalFrameBajaAlumnos.setVisible(false);
 			internalFrameAltaAlumnos.setVisible(false);
+		}
+		if(e.getSource()==btnAgregar){
+			if(verificarEstadoComponentesAlta()){
+				alumno=new Alumno(txtFNumcontrolA.getText(), txtFNombresA.getText(), txtFApellidoPA.getText()
+						, txtFApellidoMA.getText(), (byte)Integer.parseInt(comboBSemestreA.getSelectedItem().toString())
+						, comboBCarreraA.getSelectedItem().toString());
+				
+				if(alumnoDao.agregarAlumno(alumno)){
+					JOptionPane.showMessageDialog(rootPane, "Alumno agregado correctamente.");
+					restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA,
+							comboBSemestreA, comboBCarreraA);
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "Error al agregar el alumno.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
+			actualizarTablas(tablaA, mostrarTodosLosDatos);
+		}
+		if(e.getSource()==btnBuscarB){
+			if(!txtFNumcontrolB.getText().equals("")){
+				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolB.getText());
+				
+				if(al!=null){
+					txtFNombresB.setText(al.getNombre());
+					txtFApellidoPB.setText(al.getApellidoP());
+					txtFApellidoMB.setText(al.getApellidoM());
+					comboBSemestreB.setSelectedItem(String.valueOf(al.getSemestre()));
+					comboBCarreraB.setSelectedItem(al.getCarrera());
+					btnEliminar.setEnabled(true);
+					txtFNumcontrolB.setEditable(false);
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "No se encotro al alumno.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Ingresa un numero de control a buscar.");
+		}
+		if(e.getSource()==btnEliminar){
+			if(alumnoDao.eliminarAlumno(txtFNumcontrolB.getText())){
+				JOptionPane.showMessageDialog(rootPane, "Alumno eliminado correctamente.");
+				restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB,
+						comboBSemestreB, comboBCarreraB);
+				btnEliminar.setEnabled(false);
+				txtFNumcontrolB.setEditable(true);
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Error al eliminar el alumno.");
+			restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB,
+					comboBSemestreB, comboBCarreraB);
+			txtFNumcontrolB.setEditable(true);
+			actualizarTablas(tablaB, mostrarTodosLosDatos);
+		}
+		if(e.getSource()==btnBuscarM){
+			if(!txtFNumcontrolM.getText().equals("")){
+				Alumno al=alumnoDao.buscarAlumno(txtFNumcontrolM.getText());
+				if(al!=null){
+					txtFNombresM.setText(al.getNombre());
+					txtFApellidoPM.setText(al.getApellidoP());
+					txtFApellidoMM.setText(al.getApellidoM());
+					comboBSemestreM.setSelectedItem(String.valueOf(al.getSemestre()));
+					comboBCarreraM.setSelectedItem(al.getCarrera());
+					txtFNumcontrolM.setEditable(false);
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "No se encotro al alumno.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Ingresa un numero de control a buscar.");
+		}
+		if(e.getSource()==btnGuardar){
+			if(verificarEstadoComponentesModificacion()){
+				alumno=new Alumno(txtFNumcontrolM.getText(), txtFNombresM.getText(), txtFApellidoPM.getText()
+						, txtFApellidoMM.getText(), (byte)Integer.parseInt(comboBSemestreM.getSelectedItem().toString())
+						, comboBCarreraM.getSelectedItem().toString());
+				
+				if(alumnoDao.modificarAlumno(alumno)){
+					JOptionPane.showMessageDialog(rootPane, "Cambios guardados correctamente.");
+					restablecerCompontes(txtFNumcontrolM, txtFNombresM, txtFApellidoPM, txtFApellidoMM,
+							comboBSemestreM, comboBCarreraM);
+					txtFNumcontrolM.setEditable(true);
+				}
+				else
+					JOptionPane.showMessageDialog(rootPane, "Error al gurdar los cambios.");
+			}
+			else
+				JOptionPane.showMessageDialog(rootPane, "Aun existen campos vacios.");
+			actualizarTablas(tablaM, mostrarTodosLosDatos);
 		}
 		if(e.getSource()==btnLimpiarA){
 			restablecerCompontes(txtFNumcontrolA, txtFNombresA, txtFApellidoPA, txtFApellidoMA,
@@ -759,6 +884,8 @@ public class Ventana extends JFrame implements ActionListener {
 		if(e.getSource()==btnLimpiarB){
 			restablecerCompontes(txtFNumcontrolB, txtFNombresB, txtFApellidoPB, txtFApellidoMB,
 					comboBSemestreB, comboBCarreraB);
+			btnEliminar.setEnabled(false);
+			txtFNumcontrolB.setEditable(true);
 		}
 		if(e.getSource()==btnLimpiarM){
 			restablecerCompontes(txtFNumcontrolM, txtFNombresM, txtFApellidoPM, txtFApellidoMM,

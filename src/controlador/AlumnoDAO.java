@@ -11,12 +11,11 @@ public class AlumnoDAO {
 	//Metodos que permiten realizar las Altas, Bajas, Cambios y Consultas
 	
 	public boolean agregarAlumno(Alumno alumno){
-		String sql="INSERT INTO Alumnos2 VALUES ('"+alumno.getNumControl()
+		String sql="INSERT INTO Alumnos3 VALUES ('"+alumno.getNumControl()
 			+"', '"+alumno.getNombre()
 			+"', '"+alumno.getApellidoP()
 			+"', '"+alumno.getApellidoM()
-			+"', "+alumno.getEdad()
-			+", "+alumno.getSemestre()
+			+"', "+alumno.getSemestre()
 			+", '"+alumno.getCarrera()+"')";
 		
 		ConexionBD conexion=new ConexionBD();
@@ -24,14 +23,19 @@ public class AlumnoDAO {
 	}
 	
 	public boolean eliminarAlumno(String numControl){
-		String sql="DELETE FROM Alumnos2 WHERE NumControl='"+numControl+"'";
+		String sql="DELETE FROM Alumnos3 WHERE NumControl='"+numControl+"'";
 		
 		ConexionBD conexion=new ConexionBD();
 		return conexion.ejecutarInstruccion(sql);
 	}
 	
 	public boolean modificarAlumno(Alumno alumno){
-		String sql="UPDATE Alumnos2 SET Nombre='"+alumno.getNombre()+"', ApellidoP='"+alumno.getApellidoP()+"', ApellidoM='"+alumno.getApellidoM()+"', Edad="+alumno.getEdad()+", Semestre="+alumno.getSemestre()+", Carrera='"+alumno.getCarrera()+"' WHERE NumControl='"+alumno.getNumControl()+"'";
+		String sql="UPDATE Alumnos3 SET Nombre='"+alumno.getNombre()
+			+"', ApellidoP='"+alumno.getApellidoP()
+			+"', ApellidoM='"+alumno.getApellidoM()
+			+"', Semestre="+alumno.getSemestre()
+			+", Carrera='"+alumno.getCarrera()
+			+"' WHERE NumControl='"+alumno.getNumControl()+"'";
 		
 		ConexionBD conexion=new ConexionBD();
 		return conexion.ejecutarInstruccion(sql);
@@ -41,7 +45,7 @@ public class AlumnoDAO {
 	//==================BUSCAR UN REGISTRO===================
 	public Alumno buscarAlumno(String NumControl){
 		Alumno alumno=new Alumno();
-		String sql="SELECT * FROM Alumnos2 WHERE NumControl='"+NumControl+"'";
+		String sql="SELECT * FROM Alumnos3 WHERE NumControl='"+NumControl+"'";
 		
 		ConexionBD conexion=new ConexionBD();
 		ResultSet resultado=conexion.ejecutarConsultaRegistros(sql);
@@ -52,11 +56,11 @@ public class AlumnoDAO {
 			alumno.setNombre(resultado.getString(2));
 			alumno.setApellidoP(resultado.getString(3));
 			alumno.setApellidoM(resultado.getString(4));
-			alumno.setEdad(resultado.getByte(5));
-			alumno.setSemestre(resultado.getByte(6));
-			alumno.setCarrera(resultado.getString(7));
+			alumno.setSemestre(resultado.getByte(5));
+			alumno.setCarrera(resultado.getString(6));
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 		
 		return alumno;
@@ -66,7 +70,7 @@ public class AlumnoDAO {
 	public ArrayList<Alumno> buscarAlumnos(String nombre){
 		ArrayList<Alumno> listaAlumnos=new ArrayList<>();
 		Alumno alumno=null;
-		String sql="SELECT * FROM Alumnos2 WHERE Nombre='"+nombre+"'";
+		String sql="SELECT * FROM Alumnos3 WHERE Nombre='"+nombre+"'";
 		
 		ConexionBD conexion=new ConexionBD();
 		ResultSet resultado=conexion.ejecutarConsultaRegistros(sql);
@@ -79,9 +83,8 @@ public class AlumnoDAO {
 				alumno.setNombre(resultado.getString(2));
 				alumno.setApellidoP(resultado.getString(3));
 				alumno.setApellidoM(resultado.getString(4));
-				alumno.setEdad(resultado.getByte(5));
-				alumno.setSemestre(resultado.getByte(6));
-				alumno.setCarrera(resultado.getString(7));
+				alumno.setSemestre(resultado.getByte(5));
+				alumno.setCarrera(resultado.getString(6));
 				
 				listaAlumnos.add(alumno);
 			}

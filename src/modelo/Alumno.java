@@ -5,7 +5,6 @@ public class Alumno {
 	private String nombre;
 	private String apellidoP;
 	private String apellidoM;
-	private byte edad;
 	private byte semestre;
 	private String carrera;
 	
@@ -15,19 +14,17 @@ public class Alumno {
 		this.nombre = null;
 		this.apellidoP = null;
 		this.apellidoM = null;
-		this.edad = 0;
 		this.semestre = 0;
 		this.carrera = null;
 	}
 	
-	public Alumno(String numControl, String nombre, String apellidoP, String apellidoM, byte edad, byte semestre,
+	public Alumno(String numControl, String nombre, String apellidoP, String apellidoM, byte semestre,
 			String carrera) {
 		super();
 		this.numControl = numControl;
 		this.nombre = nombre;
 		this.apellidoP = apellidoP;
 		this.apellidoM = apellidoM;
-		this.edad = edad;
 		this.semestre = semestre;
 		this.carrera = carrera;
 	}
@@ -61,13 +58,6 @@ public class Alumno {
 		this.apellidoM = apellidoM;
 	}
 
-	public byte getEdad() {
-		return edad;
-	}
-	public void setEdad(byte edad) {
-		this.edad = edad;
-	}
-
 	public byte getSemestre() {
 		return semestre;
 	}
@@ -86,6 +76,6 @@ public class Alumno {
 	@Override
 	public String toString() {
 		return "Alumno [numControl=" + numControl + ", nombre=" + nombre + ", pellidoP=" + apellidoP + ", apellidoM="
-				+ apellidoM + ", edad=" + edad + ", semestre=" + semestre + ", carrera=" + carrera + "]";
+				+ apellidoM + ", semestre=" + semestre + ", carrera=" + carrera + "]";
 	}
 }
