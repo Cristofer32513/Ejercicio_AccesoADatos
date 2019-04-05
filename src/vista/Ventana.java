@@ -19,6 +19,8 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 	
 	Font fuenteArial12Normal=new Font("Arial", 0, 12);
 	Font fuenteArial14Negrita=new Font("Arial", 1, 12);
+	ImageIcon imagenBuscar=new ImageIcon("./Imagenes/Buscar.png");
+	ImageIcon buscar=new ImageIcon(imagenBuscar.getImage().getScaledInstance(30, 30, Image.SCALE_REPLICATE));
 	
 	final static String mostrarTodosLosDatos="SELECT * FROM Alumnos3";
 	
@@ -348,10 +350,13 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				panelComponentesBajaAlumos.add(comboBCarreraB);
 				
 				
-				btnBuscarB=new JButton("BUSACAR");
+				btnBuscarB=new JButton();
 					btnBuscarB.setBounds(400, 15, 110, 40);
 					btnBuscarB.setFont(fuenteArial12Normal);
 					btnBuscarB.addActionListener(this);
+					btnBuscarB.setIcon(buscar);
+					btnBuscarB.setHorizontalTextPosition(SwingConstants.CENTER );
+					btnBuscarB.setVerticalTextPosition(SwingConstants.BOTTOM );
 				panelComponentesBajaAlumos.add(btnBuscarB);
 				
 				
@@ -510,10 +515,13 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				panelComponentesModificacionesAlumos.add(comboBCarreraM);
 				
 				
-				btnBuscarM=new JButton("BUSACAR");
+				btnBuscarM=new JButton();
 					btnBuscarM.setBounds(400, 15, 110, 40);
 					btnBuscarM.setFont(fuenteArial12Normal);
 					btnBuscarM.addActionListener(this);
+					btnBuscarM.setIcon(buscar);
+					btnBuscarM.setHorizontalTextPosition(SwingConstants.CENTER );
+					btnBuscarM.setVerticalTextPosition(SwingConstants.BOTTOM );
 				panelComponentesModificacionesAlumos.add(btnBuscarM);
 				
 				
@@ -658,11 +666,14 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 				
 				
 				
-				btnBuscarC=new JButton("BUSACAR");
+				btnBuscarC=new JButton();
 					btnBuscarC.setBounds(500, 65, 110, 40);
 					btnBuscarC.setFont(fuenteArial12Normal);
 					btnBuscarC.addActionListener(this);
 					btnBuscarC.setEnabled(false);
+					btnBuscarC.setIcon(buscar);
+					btnBuscarC.setHorizontalTextPosition(SwingConstants.CENTER );
+					btnBuscarC.setVerticalTextPosition(SwingConstants.BOTTOM );
 				panelComponentesConsultasAlumos.add(btnBuscarC);
 				
 				
