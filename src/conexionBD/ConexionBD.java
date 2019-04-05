@@ -28,11 +28,11 @@ public class ConexionBD {
 			//System.out.println("Conexion establecida con la BD...");
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("No se encontro el controlador");
+			//System.out.println("No se encontro el controlador");
 			//System.out.println("Mejor me dedico a las redes ='(");
 			//e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("No se pudo conctar al servidor");
+			//System.out.println("No se pudo conctar al servidor");
 			//System.out.println("Mejor me dedico a las redes ='(");
 			//e.printStackTrace();
 		} finally {
@@ -62,7 +62,7 @@ public class ConexionBD {
 			ejecucion=stm.executeUpdate(sql);
 			return ejecucion==1?true:false;
 		} catch(SQLException e){
-			System.out.println("No se pudo ejecutar la instruccion SQL");
+			//System.out.println("No se pudo ejecutar la instruccion SQL");
 			return false;
 		}
 	}
@@ -73,7 +73,7 @@ public class ConexionBD {
 			stm=conexion.createStatement();
 			rs=stm.executeQuery(sql);
 		} catch(SQLException e) {
-			System.out.println("No se pudo ejecutar la consulta SQL");
+			//System.out.println("No se pudo ejecutar la consulta SQL");
 		}
 		return rs;
 	}

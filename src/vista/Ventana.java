@@ -64,13 +64,14 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 	
 	public Ventana() {
 		getContentPane().setLayout(new BorderLayout());
-		setSize(766, 540);
+		setSize(756, 530);
 		setTitle("Alumnos");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 		setBackground(Color.GRAY);
-		
+		setResizable(false);
+			
 		
 		JMenuBar menuBar=new JMenuBar();
 			
@@ -100,6 +101,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 			internalFrameAltaAlumnos.getContentPane().setLayout(null);
 			internalFrameAltaAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 			internalFrameAltaAlumnos.setSize(750, 480);
+			internalFrameAltaAlumnos.setResizable(false);
 			
 			JPanel panelTituloAlta=new JPanel();
 				panelTituloAlta.setBackground(new Color(0, 255, 50));
@@ -247,6 +249,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 			internalFrameBajaAlumnos.getContentPane().setLayout(null);
 			internalFrameBajaAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 			internalFrameBajaAlumnos.setSize(750, 480);
+			internalFrameBajaAlumnos.setResizable(false);
 			
 			
 			JPanel panelTituloBaja=new JPanel();
@@ -412,6 +415,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 			internalFrameModificacionAlumnos.getContentPane().setLayout(null);
 			internalFrameModificacionAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 			internalFrameModificacionAlumnos.setSize(750, 480);
+			internalFrameModificacionAlumnos.setResizable(false);
 			
 			
 			JPanel panelTituloModificacion=new JPanel();
@@ -576,6 +580,7 @@ public class Ventana extends JFrame implements ActionListener, KeyListener {
 			internalFrameConsultaAlumnos.getContentPane().setLayout(null);
 			internalFrameConsultaAlumnos.setDefaultCloseOperation(HIDE_ON_CLOSE);
 			internalFrameConsultaAlumnos.setSize(750, 480);
+			internalFrameConsultaAlumnos.setResizable(false);
 			
 			
 			JPanel panelTituloConsulta=new JPanel();
